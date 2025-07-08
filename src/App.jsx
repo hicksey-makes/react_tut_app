@@ -9,9 +9,9 @@ function App() {
 
   return (
     <>
-    <Product  />
-    <Product  />
-    <Product  />
+    <Product  currency="$" name="Pineapple" value={275} image="https://res.cloudinary.com/dbfn5lnvx/image/upload/v1726640668/react-tutorial/superm-v2/pineapple.jpg" showDecimals={true}  />
+    <Product  currency="$" name="Banana" value={75} image="https://res.cloudinary.com/dbfn5lnvx/image/upload/v1726640668/react-tutorial/superm-v2/banana.jpg" showDecimals={true} />
+    <Product  currency="$" name="Pineapple" value={275} image="https://res.cloudinary.com/dbfn5lnvx/image/upload/v1726640668/react-tutorial/superm-v2/pineapple.jpg" showDecimals={true} />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
