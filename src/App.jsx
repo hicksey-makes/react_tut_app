@@ -4,14 +4,15 @@ import viteLogo from '/vite.svg'
 import Product from './Product.jsx';
 import './App.css'
 
-function App() {
+function App(props) {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-    <Product  currency="$" name="Pineapple" value={275} image="https://res.cloudinary.com/dbfn5lnvx/image/upload/v1726640668/react-tutorial/superm-v2/pineapple.jpg" showDecimals={true}  />
-    <Product  currency="$" name="Banana" value={75} image="https://res.cloudinary.com/dbfn5lnvx/image/upload/v1726640668/react-tutorial/superm-v2/banana.jpg" showDecimals={true} />
-    <Product  currency="$" name="Pineapple" value={275} image="https://res.cloudinary.com/dbfn5lnvx/image/upload/v1726640668/react-tutorial/superm-v2/pineapple.jpg" showDecimals={true} />
+    <><div className="products-grid">
+      {props.products.map(product => {
+        return <Product key={product.id} details={product}  />
+      })}
+    </div>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
