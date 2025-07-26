@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Product from './Product.jsx';
+import Cart from './Cart.jsx';
 
 function App(props) {
   const [count, setCount] = useState(0);
@@ -33,7 +34,7 @@ function App(props) {
         Click on the Vite and React logos to learn more
       </p>
       */}
-
+      <Cart product={props.products[2]}  />
     </>
   )
 }
