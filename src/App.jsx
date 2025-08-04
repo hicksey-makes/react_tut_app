@@ -45,7 +45,7 @@ function App(props) {
           Click on the Vite and React logos to learn more
         </p>
         */}
-        <Cart product={props.products[2]}  />
+        <Cart products={props.products}  />
 
     </div>
 

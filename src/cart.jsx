@@ -1,11 +1,20 @@
 import {useState} from 'react';
 
 function Cart(props) {
-  const product = props.product;
-  const [quantity, setQuantity] = useState(0);
-
-  function handleIncrement() {
-    setQuantity(quantity + 1);
+  const products = props.products;
+  const [cart, setCart] = useState(products);
+  console.log(products);
+  function handleIncrement(product) {
+    const updatedCart = cart.map(cartProduct => {
+      if (cartProduct.id === product.id) {
+        return {
+          ...cartProduct,
+          quantity: cartProduct.quantity + 1
+        };
+      }
+      return cartProduct;
+    })
+    setCart(updatedCart);
   }
 
   function handleDecrement() {
@@ -17,22 +26,23 @@ function Cart(props) {
   return (
     <div className="cart-wrapper">
     <h1>Your cart</h1>
-    <div key={product.id} className="cart-product">
-      <img src={product.image} alt={product.name} width="126" height="84"  />
-      <div className="cart-product-details">
-        <div className="cart-product-name">
-          <p>{product.name}</p>
-          <ul className="cart-buttons">
-            <li>{quantity}</li>
-            <li><button onClick={handleIncrement}>+</button></li>
-            <li><button onClick={handleDecrement}>-</button></li>
-          </ul>
-        </div>
-        <p>${(product.price/100).toFixed(2)}</p>
-      </div>
-      <p>${((product.price/100)*quantity).toFixed(2)}</p>
-    </div>
+      {cart.map(product => <div key={product.id} className="cart-product">
+            <img src={product.image} alt={product.name} width="126" height="84"  />
+            <div className="cart-product-details">
+              <div className="cart-product-name">
+                <p>{product.name}</p>
+                <ul className="cart-buttons">
+                  <li>{product.quantity}</li>
+                  <li><button onClick={() => handleIncrement(product)}>+</button></li>
+                  <li><button onClick>-</button></li>
+                </ul>
+              </div>
+              <p>${(product.price/100).toFixed(2)}</p>
+            </div>
+            <p>${((product.price/100)*product.quantity).toFixed(2)}</p>
+          </div>
 
+      )}
     </div>
   );
 }
