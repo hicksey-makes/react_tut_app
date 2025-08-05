@@ -4,6 +4,7 @@ function Cart(props) {
   const products = props.products;
   const [cart, setCart] = useState(products);
   console.log(products);
+
   function handleIncrement(product) {
     const updatedCart = cart.map(cartProduct => {
       if (cartProduct.id === product.id) {
@@ -17,9 +18,18 @@ function Cart(props) {
     setCart(updatedCart);
   }
 
-  function handleDecrement() {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
+  function handleDecrement(currentProduct) {
+    if (currentProduct.quantity > 0) {
+      const updatedCart = cart.map(product => {
+        if (product.id === currentProduct.id) {
+          return {
+            ...product,
+            quantity: product.quantity - 1
+          }
+        }
+        return product;
+      })
+      setCart(updatedCart);
     }
   }
 
@@ -34,7 +44,7 @@ function Cart(props) {
                 <ul className="cart-buttons">
                   <li>{product.quantity}</li>
                   <li><button onClick={() => handleIncrement(product)}>+</button></li>
-                  <li><button onClick>-</button></li>
+                  <li><button onClick={() => handleDecrement(product)}>-</button></li>
                 </ul>
               </div>
               <p>${(product.price/100).toFixed(2)}</p>
