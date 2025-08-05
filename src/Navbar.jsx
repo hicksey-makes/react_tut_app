@@ -1,13 +1,16 @@
 import {useState} from 'react';
 
-export default function Navbar() {
+export default function Navbar({cart}) {
   const [light, setLight] = useState(true);
 
   function toggleTheme() {
     setLight(!light);
     document.body.classList.toggle("dark");
   }
-
+  let totalItems = 0;
+  cart.forEach(item => {
+    totalItems += item.quantity;
+  });
   return (
     <div className="navbar">
       <a className="logo">SuperM</a>
@@ -20,7 +23,7 @@ export default function Navbar() {
           <li className="nav-item"><a>Login</a></li>
           <li className="nav-item"><a>Products</a></li>
         </ul>
-        <a className="btn btn-nav">Cart (0)</a>
+        <a className="btn btn-nav">Cart ({totalItems})</a>
       </nav>
     </div>
   );

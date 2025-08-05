@@ -5,22 +5,52 @@ import Product from './Product.jsx';
 import Cart from './Cart.jsx';
 import Landing from './Landing.jsx';
 import Navbar from './Navbar';
+import products from './data.jsx';
 
-function App(props) {
+function App() {
   const [count, setCount] = useState(0);
+  const [cart, setCart] = useState(products);
+
+  function onAddProduct(product) {
+    const updatedCart = cart.map(cartProduct => {
+      if (cartProduct.id === product.id) {
+        return {
+          ...cartProduct,
+          quantity: cartProduct.quantity + 1
+        };
+      }
+      return cartProduct;
+    })
+    setCart(updatedCart);
+  }
+
+  function onRemoveProduct(currentProduct) {
+    if (currentProduct.quantity > 0) {
+      const updatedCart = cart.map(product => {
+        if (product.id === currentProduct.id) {
+          return {
+            ...product,
+            quantity: product.quantity - 1
+          }
+        }
+        return product;
+      })
+      setCart(updatedCart);
+    }
+  }
 
   return (
     <>
     <div className="wrapper-gray">
         <div className="container">
-          <Navbar  />
+          <Navbar cart={cart}  />
         </div>
     </div>
 
     <div className="container page-wrapper">
       <Landing  />
       <div className="products-grid">
-        {props.products.map(product => {
+        {products.map(product => {
           return <Product key={product.id} details={product}  />
         })}
       </div>
@@ -45,7 +75,7 @@ function App(props) {
           Click on the Vite and React logos to learn more
         </p>
         */}
-        <Cart products={props.products}  />
+        <Cart onAddProduct={onAddProduct} onRemoveProduct={onRemoveProduct} cart={cart}  />
 
     </div>
 

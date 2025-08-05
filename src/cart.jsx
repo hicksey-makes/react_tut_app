@@ -1,37 +1,11 @@
 import {useState} from 'react';
 
 function Cart(props) {
-  const products = props.products;
-  const [cart, setCart] = useState(products);
-  console.log(products);
 
-  function handleIncrement(product) {
-    const updatedCart = cart.map(cartProduct => {
-      if (cartProduct.id === product.id) {
-        return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + 1
-        };
-      }
-      return cartProduct;
-    })
-    setCart(updatedCart);
-  }
 
-  function handleDecrement(currentProduct) {
-    if (currentProduct.quantity > 0) {
-      const updatedCart = cart.map(product => {
-        if (product.id === currentProduct.id) {
-          return {
-            ...product,
-            quantity: product.quantity - 1
-          }
-        }
-        return product;
-      })
-      setCart(updatedCart);
-    }
-  }
+  console.log(props);
+  const {cart, onAddProduct, onRemoveProduct} = props;
+
 
   return (
     <div className="cart-wrapper">
@@ -43,8 +17,8 @@ function Cart(props) {
                 <p>{product.name}</p>
                 <ul className="cart-buttons">
                   <li>{product.quantity}</li>
-                  <li><button onClick={() => handleIncrement(product)}>+</button></li>
-                  <li><button onClick={() => handleDecrement(product)}>-</button></li>
+                  <li><button onClick={() => onAddProduct(product)}>+</button></li>
+                  <li><button onClick={() => onRemoveProduct(product)}>-</button></li>
                 </ul>
               </div>
               <p>${(product.price/100).toFixed(2)}</p>
