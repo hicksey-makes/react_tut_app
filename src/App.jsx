@@ -6,6 +6,7 @@ import Cart from './Cart.jsx';
 import Landing from './Landing.jsx';
 import Navbar from './Navbar';
 import products from './data.jsx';
+import Login from './Login.jsx';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -46,7 +47,7 @@ function App() {
           <Navbar cart={cart}  />
         </div>
     </div>
-
+    <Login  />
     <div className="container page-wrapper">
       <Landing  />
       <div className="products-grid">
